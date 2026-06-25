@@ -37,3 +37,20 @@ cloudops s3-list
 
 ## Author
 Ziad — DevOps 180
+
+## EC2 Commands
+
+Create instance:
+```bash
+cloudops ec2-create --name my-server
+```
+
+List instances:
+```bash
+cloudops ec2-list
+```
+
+Terminate instance:
+```bash
+cloudops ec2-terminate i-xxxxxxxx
+```
