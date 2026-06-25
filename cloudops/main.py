@@ -15,19 +15,19 @@ def get_client(service):
 
 @click.group()
 def cli():
-    """CloudOps CLI — AWS resource manager via LocalStack"""
+    """CloudOps CLI — AWS resource manager via LocalStack/Moto"""
     pass
 
 
 @cli.command()
 def health():
-    """Check LocalStack health"""
+    """Check LocalStack/Moto health"""
     try:
         response = get_client("s3").list_buckets()
-        click.echo("LocalStack: OK")
+        click.echo("Moto: OK")
         click.echo(f"S3 buckets: {len(response['Buckets'])}")
     except Exception as e:
-        click.echo(f"LocalStack: FAILED — {e}")
+        click.echo(f"Moto: FAILED — {e}")
         raise SystemExit(1)
 
 
@@ -38,6 +38,44 @@ def s3_list():
     response = s3.list_buckets()
     for bucket in response.get("Buckets", []):
         click.echo(bucket["Name"])
+
+
+@cli.command()
+def ec2_list():
+    """List EC2 instances"""
+    ec2 = get_client("ec2")
+    response = ec2.describe_instances()
+    for reservation in response.get("Reservations", []):
+        for instance in reservation.get("Instances", []):
+            click.echo(f"{instance['InstanceId']} — {instance['State']['Name']}")
+
+
+@cli.command()
+@click.option("--name", default="test-instance", help="Instance name tag")
+def ec2_create(name):
+    """Create EC2 instance"""
+    ec2 = get_client("ec2")
+    response = ec2.run_instances(
+        ImageId="ami-12345678",
+        MinCount=1,
+        MaxCount=1,
+        InstanceType="t2.micro",
+        TagSpecifications=[{
+            "ResourceType": "instance",
+            "Tags": [{"Key": "Name", "Value": name}]
+        }]
+    )
+    instance_id = response["Instances"][0]["InstanceId"]
+    click.echo(f"Created: {instance_id}")
+
+
+@cli.command()
+@click.argument("instance_id")
+def ec2_terminate(instance_id):
+    """Terminate EC2 instance"""
+    ec2 = get_client("ec2")
+    ec2.terminate_instances(InstanceIds=[instance_id])
+    click.echo(f"Terminated: {instance_id}")
 
 
 if __name__ == "__main__":
