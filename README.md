@@ -10,3 +10,30 @@ cd cloudops-cli
 python3 -m venv venv
 source venv/bin/activate
 pip install -e .
+```
+
+## Usage
+
+Start Moto (AWS mock server):
+```bash
+moto_server -p 4566
+```
+
+Check health:
+```bash
+cloudops health
+```
+
+List S3 buckets:
+```bash
+cloudops s3-list
+```
+
+## Tech Stack
+- Python 3.14
+- boto3
+- click
+- moto (for testing)
+
+## Author
+Ziad — DevOps 180
