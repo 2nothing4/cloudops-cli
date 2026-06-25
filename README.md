@@ -54,3 +54,30 @@ Terminate instance:
 ```bash
 cloudops ec2-terminate i-xxxxxxxx
 ```
+
+## Infrastructure as Code (Terraform)
+
+Deploy EC2 instance to LocalStack/Moto:
+
+```bash
+cd terraform
+terraform init
+terraform apply -auto-approve
+cd ~/cloudops-cli-repo
+cat > .gitignore << 'ENDOFFILE'
+.terraform/
+*.tfstate
+*.tfstate.backup
+.terraform.lock.hcl
+__pycache__/
+*.pyc
+*.egg-info/
+```
+
+Deploy EC2 instance to LocalStack/Moto:
+
+```bash
+cd terraform
+terraform init
+terraform apply -auto-approve
+
