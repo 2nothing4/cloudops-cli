@@ -11,6 +11,26 @@ python3 -m venv venv
 source venv/bin/activate
 pip install -e .
 ```
+### Windows
+
+1. Install [Git](https://git-scm.com/download/win) and [Python](https://www.python.org/downloads/)
+   (check **"Add python.exe to PATH"** during Python setup).
+2. If venv activation is blocked, run once:
+   ```powershell
+   Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+   ```
+3. Create and activate the venv — always confirm the `(venv)` prompt
+   marker before running `pip install`:
+   ```powershell
+   python -m venv venv
+   .\venv\Scripts\Activate.ps1
+   ```
+4. Start a mock AWS backend in a second terminal (leave it running):
+   ```powershell
+   pip install "moto[server]"
+   moto_server -p 4566
+   ```
+5. `cloudops health` should print `Moto: OK`
 
 ## Usage
 
