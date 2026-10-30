@@ -10,6 +10,7 @@ cd cloudops-cli
 python3 -m venv venv
 source venv/bin/activate
 pip install -e .
+```
 Windows Setup
 Install Git and Python (check "Add python.exe to PATH").
 
@@ -22,7 +23,7 @@ Create and activate the venv:
 powershell
 python -m venv venv
 .\venv\Scripts\Activate.ps1
-🚀 Usage
+## 🚀 Usage
 Start a mock AWS backend in a separate terminal (keep it running):
 
 bash
@@ -47,14 +48,14 @@ cloudops ec2-list
 
 # Terminate instance
 cloudops ec2-terminate i-xxxxxxxx
-🏗️ Infrastructure as Code (Terraform)
+## 🏗️ Infrastructure as Code (Terraform)
 Deploy an EC2 instance to LocalStack/Moto:
 
 bash
 cd terraform
 terraform init
 terraform apply -auto-approve
-🛠️ Tech Stack
+## 🛠️ Tech Stack
 Python 3.12+
 
 boto3 (AWS SDK)
@@ -63,7 +64,7 @@ click (CLI framework)
 
 moto (AWS mocking)
 
-🧪 Testing
+## 🧪 Testing
 (Coming soon: Add instructions on how to run your pytest suite here).
 
 Author
