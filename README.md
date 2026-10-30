@@ -1,8 +1,8 @@
-# CloudOps CLI
+# CloudOps CLI ☁️
 
-AWS resource manager for LocalStack/Moto. DevOps automation tool.
+An AWS resource manager CLI for LocalStack/Moto, built for DevOps automation.
 
-## Install
+## 📦 Installation
 
 ```bash
 git clone https://github.com/2nothing4/cloudops-cli.git
@@ -10,76 +10,61 @@ cd cloudops-cli
 python3 -m venv venv
 source venv/bin/activate
 pip install -e .
-```
-### Windows
+Windows Setup
+Install Git and Python (check "Add python.exe to PATH").
 
-1. Install [Git](https://git-scm.com/download/win) and [Python](https://www.python.org/downloads/)
-   (check **"Add python.exe to PATH"** during Python setup).
-2. If venv activation is blocked, run once:
-   ```powershell
-   Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
-   ```
-3. Create and activate the venv — always confirm the `(venv)` prompt
-   marker before running `pip install`:
-   ```powershell
-   python -m venv venv
-   .\venv\Scripts\Activate.ps1
-   ```
-4. Start a mock AWS backend in a second terminal (leave it running):
-   ```powershell
-   pip install "moto[server]"
-   moto_server -p 4566
-   ```
-5. `cloudops health` should print `Moto: OK`
+If venv activation is blocked, run:
 
-## Usage
+powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+Create and activate the venv:
 
-Start Moto (AWS mock server):
-```bash
+powershell
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+🚀 Usage
+Start a mock AWS backend in a separate terminal (keep it running):
+
+bash
+pip install "moto[server]"
 moto_server -p 4566
-```
-
 Check health:
-```bash
+
+bash
 cloudops health
-```
-
 List S3 buckets:
-```bash
+
+bash
 cloudops s3-list
-```
+EC2 Commands:
 
-## Tech Stack
-- Python 3.14
-- boto3
-- click
-- moto (for testing)
-
-## Author
-Ziad — DevOps 180
-
-## EC2 Commands
-
-Create instance:
-```bash
+bash
+# Create instance
 cloudops ec2-create --name my-server
-```
 
-List instances:
-```bash
+# List instances
 cloudops ec2-list
-```
 
-Terminate instance:
-```bash
+# Terminate instance
 cloudops ec2-terminate i-xxxxxxxx
-```
+🏗️ Infrastructure as Code (Terraform)
+Deploy an EC2 instance to LocalStack/Moto:
 
-## Infrastructure as Code (Terraform)
-
-Deploy EC2 instance to LocalStack/Moto:
-
-```bash
+bash
 cd terraform
 terraform init
 terraform apply -auto-approve
+🛠️ Tech Stack
+Python 3.12+
+
+boto3 (AWS SDK)
+
+click (CLI framework)
+
+moto (AWS mocking)
+
+🧪 Testing
+(Coming soon: Add instructions on how to run your pytest suite here).
+
+Author
+Ziad — GitHub Profile
